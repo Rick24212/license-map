@@ -92,39 +92,3 @@ function createMarker(state) {
 
 // Add markers to the map
 stateCapitals.forEach(createMarker);
-// Example of saving marker text
-function saveMarkerText(markerId, text) {
-    fetch('http://localhost:5000/save-marker', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id: markerId, text: text }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Marker data saved:', data);
-    })
-    .catch(error => {
-        console.error('Error saving marker data:', error);
-    });
-}
-
-// Example of loading markers with saved text
-function loadMarkersFromServer() {
-    fetch('http://localhost:5000/get-markers')
-    .then(response => response.json())
-    .then(markers => {
-        Object.keys(markers).forEach(markerId => {
-            const marker = markers[markerId];
-            // Add your code to update markers with saved text
-            // Example: updateMarkerText(markerId, marker.text);
-        });
-    })
-    .catch(error => {
-        console.error('Error fetching markers:', error);
-    });
-}
-
-// Call loadMarkersFromServer when map is ready to load saved markers
-document.addEventListener('DOMContentLoaded', loadMarkersFromServer);
